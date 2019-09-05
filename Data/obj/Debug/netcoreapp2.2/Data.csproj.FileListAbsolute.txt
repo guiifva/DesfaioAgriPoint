@@ -1,0 +1,9 @@
+D:\Users\PECEGE\Desktop\Agripoint\Data\bin\Debug\netcoreapp2.2\Data.deps.json
+D:\Users\PECEGE\Desktop\Agripoint\Data\bin\Debug\netcoreapp2.2\Data.dll
+D:\Users\PECEGE\Desktop\Agripoint\Data\obj\Debug\netcoreapp2.2\Data.csprojAssemblyReference.cache
+D:\Users\PECEGE\Desktop\Agripoint\Data\obj\Debug\netcoreapp2.2\Data.csproj.CoreCompileInputs.cache
+D:\Users\PECEGE\Desktop\Agripoint\Data\obj\Debug\netcoreapp2.2\Data.AssemblyInfoInputs.cache
+D:\Users\PECEGE\Desktop\Agripoint\Data\obj\Debug\netcoreapp2.2\Data.AssemblyInfo.cs
+D:\Users\PECEGE\Desktop\Agripoint\Data\bin\Debug\netcoreapp2.2\Data.pdb
+D:\Users\PECEGE\Desktop\Agripoint\Data\obj\Debug\netcoreapp2.2\Data.dll
+D:\Users\PECEGE\Desktop\Agripoint\Data\obj\Debug\netcoreapp2.2\Data.pdb

@@ -1,0 +1,14 @@
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\bin\Debug\netcoreapp2.2\UnitTest.deps.json
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\bin\Debug\netcoreapp2.2\UnitTest.runtimeconfig.json
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\bin\Debug\netcoreapp2.2\UnitTest.runtimeconfig.dev.json
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\bin\Debug\netcoreapp2.2\UnitTest.dll
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\bin\Debug\netcoreapp2.2\UnitTest.pdb
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\obj\Debug\netcoreapp2.2\UnitTest.csprojAssemblyReference.cache
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\obj\Debug\netcoreapp2.2\UnitTest.csproj.CoreCompileInputs.cache
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\obj\Debug\netcoreapp2.2\UnitTest.AssemblyInfoInputs.cache
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\obj\Debug\netcoreapp2.2\UnitTest.AssemblyInfo.cs
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\obj\Debug\netcoreapp2.2\UnitTest.dll
+D:\Users\PECEGE\Desktop\Agripoint\UnitTest\obj\Debug\netcoreapp2.2\UnitTest.pdb
