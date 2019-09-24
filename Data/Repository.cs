@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,9 +18,19 @@ namespace Data
             _context = context;
         }
 
-        public virtual IQueryable<TEntity> GetAll()
+        public virtual IQueryable<TEntity> All(Expression<Func<TEntity, bool>> filters)
         {
-            return _context.Set<TEntity>().AsNoTracking();
+            IQueryable<TEntity> query = _context.Set<TEntity>()
+                .Where(filters)
+                .AsNoTracking();
+            return query;
+        }
+
+        public virtual IQueryable<TEntity> All()
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>()
+                .AsNoTracking();
+            return query;
         }
 
         public void Update(params TEntity[] obj)
@@ -33,9 +45,12 @@ namespace Data
             _context.SaveChanges();
         }
 
-        public virtual IQueryable<TEntity> Find(long id)
+        public TEntity Find(long key)
         {
-            return _context.Set<TEntity>().AsNoTracking().Where(x => x.Id == id);
+            IQueryable<TEntity> query = _context.Set<TEntity>()
+                .Where(x => x.Id == key);
+
+            return query.FirstOrDefault();
         }
 
         public void Insert(params TEntity[] obj)
@@ -43,6 +58,20 @@ namespace Data
             _context.Set<TEntity>().AddRange(obj);
             _context.SaveChanges();
         }
+
+        public long Count()
+        {
+            return _context.Set<TEntity>().LongCount();
+        }
+
+        public long Count(Expression<Func<TEntity, bool>> filters)
+        {
+            return _context.Set<TEntity>().Where(filters).LongCount();
+        }
+
+        public bool Any(Expression<Func<TEntity, bool>> filters) =>
+            _context.Set<TEntity>().Any(filters);
+
 
         public async Task UpdateAsync(params TEntity[] obj)
         {
@@ -56,29 +85,50 @@ namespace Data
             await _context.SaveChangesAsync();
         }
 
-
-        public virtual async Task<IList<TEntity>> GetAllAsync()
+        public virtual async Task<IList<TEntity>> AllAsync(Expression<Func<TEntity, bool>> filters)
         {
             IQueryable<TEntity> query = _context.Set<TEntity>()
+                    .Where(filters)
                     .AsNoTracking();
-                    
+
             return await query.ToListAsync();
         }
 
-        public virtual async Task<TEntity> FindAsync(long id)
+
+        public virtual async Task<IList<TEntity>> AllAsync()
         {
             IQueryable<TEntity> query = _context.Set<TEntity>()
-                .AsNoTracking()
-                .Where(x => x.Id == id);
+                    .AsNoTracking();
+
+            return await query.ToListAsync();
+        }
+
+        public virtual async Task<TEntity> FindAsync(long key)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>()
+                .Where(x => x.Id == key);
 
             return await query.FirstOrDefaultAsync();
         }
 
-        public virtual async Task InsertAsync(params TEntity[] obj)
+        public async Task InsertAsync(params TEntity[] obj)
         {
             _context.Set<TEntity>().AddRange(obj);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<long> CountAsync(Expression<Func<TEntity, bool>> filters)
+        {
+            return await _context.Set<TEntity>().Where(filters).LongCountAsync();
+        }
+
+        public async Task<long> CountAsync()
+        {
+            return await _context.Set<TEntity>().LongCountAsync();
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filters) =>
+            await _context.Set<TEntity>().AnyAsync(filters);
 
     }
 }

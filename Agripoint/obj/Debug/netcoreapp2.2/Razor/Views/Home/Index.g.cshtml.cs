@@ -19,12 +19,12 @@ using Agripoint;
 #line default
 #line hidden
 #line 2 "D:\Users\PECEGE\Desktop\Agripoint\Agripoint\Views\_ViewImports.cshtml"
-using Agripoint.Models;
+using Data.Models;
 
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"99464617055fdb505bb0bb7fd91f9b14f7b0d030", @"/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2224bd838b2df48525920ae280b428401fb8647c", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bbbba321ced1874b4613c7de4a89938c4449f8e5", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

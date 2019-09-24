@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Business.Implementations;
+using Business.Interfaces;
 using Data;
+using Data.Interfaces;
+using Data.Repository;
+using Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,10 +41,23 @@ namespace Agripoint
             });
 
             services.AddDbContext<ApplicationContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //Services
+            services.AddScoped(typeof(IServiceCrud<>), typeof(ServiceCrud<>));
+            services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<IUserService, UserService>();
+
+
+            //Repositories
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +84,58 @@ namespace Agripoint
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        /// <summary>
+        /// Method to auto register all services to the Dependency Injection
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="assemblyPath"></param>
+        private void ConfigureServicesDI(IServiceCollection services, string assemblyPath)
+        {
+            //recovers the service dll
+            var assembly = Assembly.LoadFrom(Path.Combine(assemblyPath, "Business.dll"));
+
+            //find all interfaces
+            var interfaceTypes = assembly.DefinedTypes.Where(x => x.IsInterface);
+            //find all concrete classes
+            var concreteTypes = assembly.DefinedTypes.Where(x => x.IsClass && !x.IsAbstract);
+
+            foreach (var interfaceType in interfaceTypes)
+            {
+                //for each interface, find the matching concrete implementation and register to the Dependency Injection
+                var concreteType = concreteTypes.FirstOrDefault(x => x.ImplementedInterfaces.Contains(interfaceType));
+                if (concreteType != null)
+                {
+                    services.AddScoped(interfaceType, concreteType);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method to auto register all services to the Dependency Injection
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="assemblyPath"></param>
+        private void ConfigureRepositoriesDI(IServiceCollection services, string assemblyPath)
+        {
+            //recovers the service dll
+            var assembly = Assembly.LoadFrom(Path.Combine(assemblyPath, "Data.dll"));
+
+            //find all interfaces
+            var interfaceTypes = assembly.DefinedTypes.Where(x => x.IsInterface);
+            //find all concrete classes
+            var concreteTypes = assembly.DefinedTypes.Where(x => x.IsClass && !x.IsAbstract);
+
+            foreach (var interfaceType in interfaceTypes)
+            {
+                //for each interface, find the matching concrete implementation and register to the Dependency Injection
+                var concreteType = concreteTypes.FirstOrDefault(x => x.ImplementedInterfaces.Contains(interfaceType));
+                if (concreteType != null)
+                {
+                    services.AddScoped(interfaceType, concreteType);
+                }
+            }
         }
     }
 }

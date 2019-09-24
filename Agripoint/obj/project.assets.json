@@ -4439,6 +4439,19 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Business.dll": {}
+        }
+      },
       "Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -12084,6 +12097,11 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "Business/1.0.0": {
+      "type": "project",
+      "path": "../Business/Business.csproj",
+      "msbuildProject": "../Business/Business.csproj"
+    },
     "Data/1.0.0": {
       "type": "project",
       "path": "../Data/Data.csproj",
@@ -12092,6 +12110,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "Business >= 1.0.0",
       "Data >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
@@ -12130,6 +12149,9 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
+            "D:\\Users\\PECEGE\\Desktop\\Agripoint\\Business\\Business.csproj": {
+              "projectPath": "D:\\Users\\PECEGE\\Desktop\\Agripoint\\Business\\Business.csproj"
+            },
             "D:\\Users\\PECEGE\\Desktop\\Agripoint\\Data\\Data.csproj": {
               "projectPath": "D:\\Users\\PECEGE\\Desktop\\Agripoint\\Data\\Data.csproj"
             }
