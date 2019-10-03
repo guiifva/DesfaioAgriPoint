@@ -3,17 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agripoint", "Agripoint\Agripoint.csproj", "{01687DA4-4091-4950-B851-C5AF9C0F6B70}"
-	ProjectSection(ProjectDependencies) = postProject
-		{62E3FE29-3110-4EFC-AB5B-3C52EA80C7C1} = {62E3FE29-3110-4EFC-AB5B-3C52EA80C7C1}
-		{4B97DF73-54E9-43C7-AD87-E84222E4AD66} = {4B97DF73-54E9-43C7-AD87-E84222E4AD66}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{62E3FE29-3110-4EFC-AB5B-3C52EA80C7C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{4F7B1EB9-55B4-40B4-9089-2490F5CE8A58}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{4B97DF73-54E9-43C7-AD87-E84222E4AD66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agripoint", "Agripoint\Agripoint.csproj", "{49447674-AA33-403D-89AA-714304E17893}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{01687DA4-4091-4950-B851-C5AF9C0F6B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01687DA4-4091-4950-B851-C5AF9C0F6B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01687DA4-4091-4950-B851-C5AF9C0F6B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01687DA4-4091-4950-B851-C5AF9C0F6B70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{62E3FE29-3110-4EFC-AB5B-3C52EA80C7C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{62E3FE29-3110-4EFC-AB5B-3C52EA80C7C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E3FE29-3110-4EFC-AB5B-3C52EA80C7C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,6 +29,10 @@ Global
 		{4B97DF73-54E9-43C7-AD87-E84222E4AD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B97DF73-54E9-43C7-AD87-E84222E4AD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B97DF73-54E9-43C7-AD87-E84222E4AD66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49447674-AA33-403D-89AA-714304E17893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49447674-AA33-403D-89AA-714304E17893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49447674-AA33-403D-89AA-714304E17893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49447674-AA33-403D-89AA-714304E17893}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

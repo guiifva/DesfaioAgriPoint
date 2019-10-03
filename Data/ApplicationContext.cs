@@ -15,6 +15,8 @@ namespace Data
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<SubscriptionPlans> SubscriptionPlans { get; set; }
+        public DbSet<Orders> Orders { get; set; }
 
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
@@ -36,6 +38,8 @@ namespace Data
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new AddressConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new SubscriptionPlansConfiguration());
+            modelBuilder.ApplyConfiguration(new OrdersConfiguration());
         }
 
         public override int SaveChanges()
