@@ -77,6 +77,57 @@ namespace Data.Migrations
                     b.ToTable("Companies");
                 });
 
+            modelBuilder.Entity("Data.Models.Order", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedAt");
+
+                    b.Property<string>("CreditCardNumber")
+                        .IsRequired()
+                        .HasMaxLength(16);
+
+                    b.Property<double>("Total");
+
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<long>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Data.Models.SubscriptionPlans", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedAt");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("PlanName")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<double>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubscriptionsPlans");
+                });
+
             modelBuilder.Entity("Data.Models.User", b =>
                 {
                     b.Property<long>("Id")
@@ -114,6 +165,14 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Data.Models.Order", b =>
+                {
+                    b.HasOne("Data.Models.User", "User")
+                        .WithOne("Order")
+                        .HasForeignKey("Data.Models.Order", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Data.Models.User", b =>

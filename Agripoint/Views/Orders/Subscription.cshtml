@@ -1,0 +1,120 @@
+﻿@using ViewModel.SubscriptionPlans;
+@model SubscriptionPlans;
+@{
+ViewData["Title"] = "Subscription";
+}
+
+<style>
+    .font-size-16 {
+        font-size: 14px !important;
+    }
+
+    .card-body p {
+        margin: 0px;
+    }
+
+    #planDescription {
+        padding-inline-start: 20px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="title">VOCÊ ESTÁ ASSINANDO</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-12 col-sm-12 font-size-16">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Dados do pedido <span class="ml-2">R$ @Model.Value</span></h5>
+                    <h5>@Model.PlanName</h5>
+                    <ul id="planDescription">
+                        <li>Será renovada a cada 6 meses e você será avisado por email com antecedência.</li>
+                        <li>
+                            A assinatura pode ser cancelada a qualquer momento sem nenhuma multa ou custos adicionais
+                        </li>
+                    </ul>
+
+                    <p class="mt-4"><b>Fulano da Silva</b></p>
+                    <p>email@email.com.br</p>
+                    <p>555.555.555-55</p>
+                    <p>Brasil | São Paulo | Piracicaba</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-8 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center mt-3 mb-4">Escolha uma forma de pagamento</h5>
+
+                    <form action="/Orders/Checkout" method="post">
+                    
+
+
+                        <div class="form-group form-row justify-content-center">
+                            <input type="number" placeholder="Número do cartão" class="form-control col-10 mb-3" value="CreditCardNumber">
+                            <input type="text" placeholder="Nome do titular (como está no cartão)" class="form-control col-10" onchange="">
+                        </div>
+                        <div class="form-group form-row justify-content-center">
+                            <input type="number" placeholder="Mês" class="form-control col-2 mr-3" value="">
+                            <input type="number" placeholder="Ano" class="form-control col-2 mr-4">
+                            <input type="number" placeholder="CVV" class="form-control col-5 mb-3">
+                        </div>
+                        <div class="row justify-content-center mt-4">
+                            <button class="btn btn-secondary button-Style">Finalizar assinatura</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+        var tgdeveloper = {
+
+            /**
+            * getCardFlag
+            * Return card flag by number
+            *
+            *
+            */
+            getCardFlag: function (cardnumber) {
+                var cardnumber = cardnumber.replace(/[^0-9]+/g, '');
+
+                var cards = {
+                    visa: /^4[0-9]{12}(?:[0-9]{3})/,
+                    mastercard: /^5[1-5][0-9]{14}/,
+                    diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}/,
+                    amex: /^3[47][0-9]{13}/,
+                    discover: /^6(?:011|5[0-9]{2})[0-9]{12}/,
+                    hipercard: /^(606282\d{10}(\d{3})?)|(3841\d{15})/,
+                    elo: /^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})/,
+                    jcb: /^(?:2131|1800|35\d{3})\d{11}/,
+                    aura: /^(5078\d{2})(\d{2})(\d{11})$/
+                };
+
+                for (var flag in cards) {
+                    if (cards[flag].test(cardnumber)) {
+                        return flag;
+                    }
+                }
+
+                return false;
+            }
+
+        }
+    </script>

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Business.Implementations
 {
-    public class OrdersService : ServiceCrud<Orders>, IOrdersService
+    public class OrdersService : ServiceCrud<Order>, IOrdersService
     {
         public OrdersService(IOrdersRepository repository) 
             : base(repository)

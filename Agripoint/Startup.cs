@@ -45,18 +45,21 @@ namespace Agripoint
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //Services
-            services.AddScoped(typeof(IServiceCrud<>), typeof(ServiceCrud<>));
+            //services.AddScoped(typeof(IServiceCrud<>), typeof(ServiceCrud<>));
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISubscriptionPlansService, SubscriptionPlansService>();
+            services.AddScoped<IOrdersService, OrdersService>();
 
 
             //Repositories
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISubscriptionPlansRepository, SubscriptionPlansRepository>();
+            services.AddScoped<IOrdersRepository, OrdersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

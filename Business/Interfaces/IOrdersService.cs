@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Business.Interfaces
 {
-    public interface IOrdersService : IServiceCrud<Orders>
+    public interface IOrdersService : IServiceCrud<Order>
     {
     }
 }

@@ -15,6 +15,7 @@ namespace Data.Models
 
         public virtual Company Company { get; set; }
         public virtual Address Address { get; set; }
+        public virtual Order Order { get; set; }
 
     }
 }

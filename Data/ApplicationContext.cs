@@ -16,7 +16,7 @@ namespace Data
         public DbSet<Address> Address { get; set; }
         public DbSet<Company> Company { get; set; }
         public DbSet<SubscriptionPlans> SubscriptionPlans { get; set; }
-        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
@@ -39,7 +39,7 @@ namespace Data
             modelBuilder.ApplyConfiguration(new AddressConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new SubscriptionPlansConfiguration());
-            modelBuilder.ApplyConfiguration(new OrdersConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
         }
 
         public override int SaveChanges()

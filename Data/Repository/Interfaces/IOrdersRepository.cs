@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Data.Repository.Interfaces
 {
-    public interface IOrdersRepository : IRepository<Orders>
+    public interface IOrdersRepository : IRepository<Order>
     {
     }
 }

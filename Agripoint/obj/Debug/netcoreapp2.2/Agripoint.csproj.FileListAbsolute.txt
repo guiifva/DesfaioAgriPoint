@@ -32,3 +32,7 @@ D:\Users\PECEGE\Desktop\Agripoint\Agripoint\bin\Debug\netcoreapp2.2\Agripoint.Vi
 D:\Users\PECEGE\Desktop\Agripoint\Agripoint\bin\Debug\netcoreapp2.2\Business.dll
 D:\Users\PECEGE\Desktop\Agripoint\Agripoint\bin\Debug\netcoreapp2.2\Business.pdb
 D:\Users\PECEGE\Desktop\Agripoint\Agripoint\obj\Debug\netcoreapp2.2\Agripoint.Views.pdb
+D:\Users\PECEGE\Desktop\Agripoint\Agripoint\obj\Debug\netcoreapp2.2\Razor\Views\Orders\Index.g.cshtml.cs
+D:\Users\PECEGE\Desktop\Agripoint\Agripoint\bin\Debug\netcoreapp2.2\ViewModel.dll
+D:\Users\PECEGE\Desktop\Agripoint\Agripoint\bin\Debug\netcoreapp2.2\ViewModel.pdb
+D:\Users\PECEGE\Desktop\Agripoint\Agripoint\obj\Debug\netcoreapp2.2\Razor\Views\Orders\Subscription.g.cshtml.cs

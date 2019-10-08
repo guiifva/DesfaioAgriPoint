@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Data.Repository
 {
-    public class OrdersRepository : Repository<Orders>, IOrdersRepository
+    public class OrdersRepository : Repository<Order>, IOrdersRepository
     {
         public OrdersRepository(ApplicationContext context) 
             : base(context)
