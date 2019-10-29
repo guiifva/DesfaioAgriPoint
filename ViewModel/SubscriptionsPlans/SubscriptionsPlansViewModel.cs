@@ -13,6 +13,8 @@ namespace ViewModel.SubscriptionsPlans
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Description { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public int PlanMonths { get; set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public double Value { get; set; }
     }
 }

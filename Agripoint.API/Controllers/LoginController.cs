@@ -45,7 +45,14 @@ namespace Agripoint.API.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(await _jwtService.JWTGenerator(model.Email));
+                try
+                {
+                    return Ok(await _jwtService.JWTGenerator(model.Email));
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                }
             }
 
             return BadRequest("Usuário ou senha inválidos");
@@ -67,12 +74,6 @@ namespace Agripoint.API.Controllers
             {
                 return BadRequest(e);
             }
-            
-
-
-
-
-
         }
     }
 }

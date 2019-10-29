@@ -26,28 +26,37 @@ namespace Business.Implementations
 
         public async Task<string> JWTGenerator(string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-
-            var identityClaims = new ClaimsIdentity();
-            identityClaims.AddClaims(await _userManager.GetClaimsAsync(user));
-
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            try
             {
 
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id)
-                }),
-                Issuer = _appSettings.Emissor,
-                Audience = _appSettings.ValidoEm,
-                Expires = DateTime.UtcNow.AddHours(_appSettings.ExpirationHours),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+                var user = await _userManager.FindByEmailAsync(email);
 
-            return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+                var identityClaims = new ClaimsIdentity();
+                identityClaims.AddClaims(await _userManager.GetClaimsAsync(user));
+
+                // authentication successful so generate jwt token
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim(ClaimTypes.Name, user.Id)
+                    }),
+                    Issuer = _appSettings.Issuer,
+                    Audience = _appSettings.Audience,
+                    Expires = DateTime.UtcNow.AddHours(_appSettings.ExpirationHours),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                        SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

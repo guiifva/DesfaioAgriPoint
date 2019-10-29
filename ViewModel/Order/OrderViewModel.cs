@@ -10,5 +10,6 @@ namespace ViewModel.Order
         public double Total { get; set; }
         public long SubscriptionPlanId { get; set; }
         public CreditCard CreditCard { get; set; }
+
     }
 }

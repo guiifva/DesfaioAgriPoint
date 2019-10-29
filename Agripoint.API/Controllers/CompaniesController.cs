@@ -31,6 +31,7 @@ namespace Agripoint.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCompanies()
         {
@@ -52,6 +53,7 @@ namespace Agripoint.API.Controllers
         /// <returns>Objeto contendo o registro buscado.</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAsync(long id)
@@ -77,6 +79,9 @@ namespace Agripoint.API.Controllers
         /// <param name="model">Objeto para inserção na base de dados</param>
         /// <returns>Objeto contendo os dados recém adicionados.</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public virtual async Task<IActionResult> InsertAsync([FromBody] CompanyViewModel model)
         {
             if (!ModelState.IsValid)
@@ -100,6 +105,10 @@ namespace Agripoint.API.Controllers
         /// <param name="model">Objeto para atualização na base de dados</param>
         /// <returns>Objeto contendo os dados recém atualizados.</returns>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public virtual async Task<IActionResult> UpdateAsync([FromBody] CompanyViewModel model)
         {
             if (!ModelState.IsValid)
@@ -123,6 +132,10 @@ namespace Agripoint.API.Controllers
         /// <param name="id">Id do tipo long a ser realizado o  delete na base de dados</param>
         /// <returns>No Content</returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteAsync(long id)
         {
             try

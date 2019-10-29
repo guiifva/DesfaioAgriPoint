@@ -12,6 +12,7 @@ namespace Data.Models
         public long CreditCardId { get; set; }
         public long SubscriptionPlanId { get; set; }
         public DateTime PurchaseDay { get; set; }
+        public DateTime PlanRenewalDate { get; set; }
 
         [JsonIgnore]
         public virtual User User { get; set; }

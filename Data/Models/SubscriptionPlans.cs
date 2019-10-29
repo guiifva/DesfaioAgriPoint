@@ -9,6 +9,7 @@ namespace Data.Models
     {
         public string PlanName { get; set; }
         public string Description { get; set; }
+        public int PlanMonths { get; set; }
         public double Value { get; set; }
 
         [JsonIgnore]

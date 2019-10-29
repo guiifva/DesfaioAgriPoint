@@ -10,6 +10,7 @@ namespace Data.Models
     {
         public string ZipCode { get; set; }
         public string State { get; set; }
+        public string City { get; set; }
         public string Street { get; set; }
         public int PlaceNumber { get; set; }
         public string Complement { get; set; }

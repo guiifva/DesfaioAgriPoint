@@ -18,7 +18,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.IdentityModel.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using Utils;
 
@@ -103,18 +105,27 @@ namespace Agripoint.API
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidAudience = appSettings.ValidoEm,
-                    ValidIssuer = appSettings.Emissor
+                    ValidAudience = appSettings.Audience,
+                    ValidIssuer = appSettings.Issuer
                 };
             });
 
             if (CurrentEnvironment.EnvironmentName == "Development")
             {
-                services.AddMvc(opts =>
+                services.AddMvc(config =>
                 {
-                    opts.Filters.Add(new AllowAnonymousFilter());
+                    config.Filters.Add(new AllowAnonymousFilter());
                 });
+                IdentityModelEventSource.ShowPII = true;
             }
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //swagger
             ConfigureSwagger(services);
@@ -136,6 +147,7 @@ namespace Agripoint.API
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
+            
             app.UseMvc();
 
             //swagger
