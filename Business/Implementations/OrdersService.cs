@@ -27,7 +27,7 @@ namespace Business.Implementations
 
             var entity = _mapper.Map<Order>(model);
 
-            //adicionando Timestamp do dia da compra e do dia da renovação
+            //adicionando Timestamp do dia da compra e do dia da renovação e valor da compra
             entity = PreSave(entity, plan);
 
             await _repository.InsertAsync(entity);
@@ -39,9 +39,16 @@ namespace Business.Implementations
         {
             model.PurchaseDay = DateTimeHelper.BrazilNow;
             model.PlanRenewalDate = model.PurchaseDay.AddMonths(plan.PlanMonths);
+            model.Total = plan.Value;
 
             return model;
         }
 
+        public async Task<OrderViewModel> InsertModelAsync(Order model)
+        {
+            await _repository.InsertAsync(model);
+
+            return _mapper.Map<OrderViewModel>(model);
+        }
     }
 }

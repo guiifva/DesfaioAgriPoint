@@ -18,7 +18,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AutoMapper;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Logging;
 using Swashbuckle.AspNetCore.Swagger;
@@ -66,6 +68,7 @@ namespace Agripoint.API
             services.AddScoped<ISubscriptionPlansService, SubscriptionPlansService>();
             services.AddScoped<IOrdersService, OrdersService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IDailyJobs, DailyJobs>();
 
 
             //Repositories
@@ -83,8 +86,11 @@ namespace Agripoint.API
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            // JWT
+            services.AddHangfire(
+                x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"))
+            );
 
+            // JWT
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
@@ -127,6 +133,7 @@ namespace Agripoint.API
                 config.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+
             //swagger
             ConfigureSwagger(services);
         }
@@ -143,6 +150,14 @@ namespace Agripoint.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //hangfire
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
+
+            // added this
+            RecurringJob.AddOrUpdate<IDailyJobs>(
+                dailyTasks => dailyTasks.RunDaily(), Cron.Daily(6));
 
             app.UseHttpsRedirection();
 

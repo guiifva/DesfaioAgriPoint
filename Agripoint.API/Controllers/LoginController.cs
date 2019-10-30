@@ -58,7 +58,15 @@ namespace Agripoint.API.Controllers
             return BadRequest("Usuário ou senha inválidos");
         }
 
+        /// <summary>
+        /// Inserir o objeto na base de dados.
+        /// </summary>
+        /// <param name="model">Objeto para registro na base de dados</param>
+        /// <returns>Objeto contendo os dados recém adicionados.</returns>
         [HttpPost("Register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
             if (!ModelState.IsValid)
@@ -66,7 +74,7 @@ namespace Agripoint.API.Controllers
 
             try
             {
-                var result = await _userService.RegisterUserAsync(model);
+                var result = await _userService.InsertUserAsync(model);
 
                 return Ok(result);
             }

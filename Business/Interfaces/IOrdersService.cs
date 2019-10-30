@@ -11,5 +11,6 @@ namespace Business.Interfaces
     public interface IOrdersService : IServiceCrud<Order, OrderViewModel>
     {
         Task<OrderViewModel> InsertWithPlanAsync(OrderViewModel model, SubscriptionsPlansViewModel plan);
+        Task<OrderViewModel> InsertModelAsync(Order model);
     }
 }

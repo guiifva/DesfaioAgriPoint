@@ -19,12 +19,17 @@ namespace Data.Configuration
                 .HasMaxLength(150)
                 .IsRequired();
 
-            builder.Property(x => x.Value)
-                .IsRequired();
-
             builder.Property(x => x.Description)
                 .HasMaxLength(255)
                 .IsRequired();
+
+            builder.Property(x => x.PlanMonths)
+                .HasMaxLength(5)
+                .IsRequired();
+
+            builder.Property(x => x.Value)
+                .IsRequired();
+
         }
     }
 }

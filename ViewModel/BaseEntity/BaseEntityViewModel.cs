@@ -6,6 +6,7 @@ namespace ViewModel.BaseEntity
 {
     public class BaseEntityViewModel
     {
+        
         public long Id { get; set; }
     }
 }

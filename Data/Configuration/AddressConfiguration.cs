@@ -15,8 +15,16 @@ namespace Data.Configuration
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.ZipCode)
+                .HasMaxLength(11)
+                .IsRequired();
+
             builder.Property(x => x.State)
                 .HasMaxLength(100)
+                .IsRequired();
+
+            builder.Property(x => x.City)
+                .HasMaxLength(150)
                 .IsRequired();
 
             builder.Property(x => x.Street)
@@ -24,6 +32,7 @@ namespace Data.Configuration
                 .IsRequired();
 
             builder.Property(x => x.PlaceNumber)
+                .HasMaxLength(10)
                 .IsRequired();
 
             builder.Property(x => x.Complement)

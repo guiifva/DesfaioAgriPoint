@@ -22,6 +22,8 @@ namespace Data.Repository.Interfaces
         Task<IList<User>> AllAsync();
         Task<IList<User>> AllAsync(Expression<Func<User, bool>> filters);
         Task<User> FindAsync(string key);
+        Task<User> FindAsNoTrackingAsync(string key);
+        Task<User> FindByEmailAsync(string email);
         Task InsertAsync(params User[] obj);
         Task UpdateAsync(params User[] obj);
         Task DeleteAsync(params User[] obj);

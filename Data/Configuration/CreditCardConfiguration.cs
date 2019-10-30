@@ -15,14 +15,23 @@ namespace Data.Configuration
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Valid)
-                .HasMaxLength(5);
+            builder.Property(x => x.CardholderName)
+                .HasMaxLength(100)
+                .IsRequired();
 
             builder.Property(x => x.CreditCardNumber)
                 .HasMaxLength(16)
                 .IsRequired();
-
                 
+            builder.Property(x => x.Valid)
+                .HasMaxLength(5)
+                .IsRequired();
+
+            builder.Property(x => x.CVV)
+                .HasMaxLength(3)
+                .IsRequired();
+
+
         }
     }
 }

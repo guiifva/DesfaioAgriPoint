@@ -16,6 +16,6 @@ namespace Data.Models
         [JsonIgnore]
         public virtual User User { get; set; }
         [JsonIgnore]
-        public virtual Order Order { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

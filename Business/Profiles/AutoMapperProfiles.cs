@@ -6,8 +6,10 @@ using Data.Models;
 using ViewModel;
 using ViewModel.Address;
 using ViewModel.Company;
+using ViewModel.Login;
 using ViewModel.Order;
 using ViewModel.SubscriptionsPlans;
+using ViewModel.User;
 
 namespace Business.Profiles
 {
@@ -25,6 +27,12 @@ namespace Business.Profiles
                 .ReverseMap();
 
             CreateMap<Order, OrderViewModel>()
+                .ReverseMap();
+
+            CreateMap<User, UserViewModel>()
+                .ReverseMap();
+
+            CreateMap<User, RegisterUserViewModel>()
                 .ReverseMap();
         }
     }

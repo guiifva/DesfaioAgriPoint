@@ -50,7 +50,9 @@ namespace Data.Repository
         public User Find(string key)
         {
             IQueryable<User> query = _context.Set<User>()
-                .Where(x => x.Id == key);
+                .Where(x => x.Id == key)
+                .Include(x => x.Address)
+                .Include(x => x.Company);
 
             return query.FirstOrDefault();
         }
@@ -108,7 +110,18 @@ namespace Data.Repository
         public virtual async Task<User> FindAsync(string key)
         {
             IQueryable<User> query = _context.Set<User>()
-                .Where(x => x.Id == key);
+                .Where(x => x.Id == key)
+                .Include(x => x.Address)
+                .Include(x => x.Company);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public virtual async Task<User> FindAsNoTrackingAsync(string key)
+        {
+            IQueryable<User> query = _context.Set<User>()
+                .Where(x => x.Id == key)
+                .AsNoTracking();
 
             return await query.FirstOrDefaultAsync();
         }
@@ -131,6 +144,16 @@ namespace Data.Repository
 
         public async Task<bool> AnyAsync(Expression<Func<User, bool>> filters) =>
             await _context.Set<User>().AnyAsync(filters);
+
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            IQueryable<User> query = _context.Set<User>()
+                .Where(x => x.Email == email)
+                .Include(x => x.Address)
+                .Include(x => x.Company);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }
 

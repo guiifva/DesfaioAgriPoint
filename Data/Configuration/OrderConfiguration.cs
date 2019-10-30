@@ -18,6 +18,11 @@ namespace Data.Configuration
             builder.Property(x => x.Total)
                 .IsRequired();
 
+            builder.Property(x => x.PurchaseDay)
+                .IsRequired();
+
+            builder.Property(x => x.PlanRenewalDate)
+                .IsRequired();
 
             //Relations
             builder.HasOne(x => x.User)
@@ -25,8 +30,8 @@ namespace Data.Configuration
                 .HasForeignKey(x => x.UserId);
 
             builder.HasOne(x => x.CreditCard)
-                .WithOne(x => x.Order)
-                .HasForeignKey<Order>(x => x.CreditCardId);
+                .WithMany(x => x.Order)
+                .HasForeignKey(x => x.CreditCardId);
 
             builder.HasOne(x => x.SubscriptionPlan)
                 .WithMany(x => x.Order)
