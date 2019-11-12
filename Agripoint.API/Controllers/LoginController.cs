@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using ViewModel.Login;
 
 namespace Agripoint.API.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [ApiVersion("1.0")]
     [Produces("application/json")]

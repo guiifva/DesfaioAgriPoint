@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Business.Implementations;
 using Business.Interfaces;
@@ -125,6 +126,7 @@ namespace Agripoint.API
                 IdentityModelEventSource.ShowPII = true;
             }
 
+
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -141,6 +143,13 @@ namespace Agripoint.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            if (env.EnvironmentName != "Test")
+            {
+                UpdateDatabase(app);
+            }
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -150,6 +159,8 @@ namespace Agripoint.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
 
             //hangfire
             app.UseHangfireDashboard();
@@ -162,8 +173,11 @@ namespace Agripoint.API
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
-            
+
+            app.UseCors(option => option.AllowAnyOrigin()); ;
+
             app.UseMvc();
+
 
             //swagger
             app.UseSwagger();
@@ -202,15 +216,25 @@ namespace Agripoint.API
                         }
                     });
 
-                string caminhoAplicacao =
-                    PlatformServices.Default.Application.ApplicationBasePath;
-                string nomeAplicacao =
-                    PlatformServices.Default.Application.ApplicationName;
-                string caminhoXmlDoc =
-                    Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+                string caminhoAplicacao = PlatformServices.Default.Application.ApplicationBasePath;
+                string nomeAplicacao = PlatformServices.Default.Application.ApplicationName;
+                string caminhoXmlDoc = Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
 
                 c.IncludeXmlComments(caminhoXmlDoc);
             });
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

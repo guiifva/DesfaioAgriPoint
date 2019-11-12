@@ -26,12 +26,7 @@ namespace Data
             return query;
         }
 
-        public virtual IQueryable<TEntity> All()
-        {
-            IQueryable<TEntity> query = _context.Set<TEntity>()
-                .AsNoTracking();
-            return query;
-        }
+        public virtual IQueryable<TEntity> All() => _context.Set<TEntity>().AsNoTracking();
 
         public void Update(params TEntity[] obj)
         {

@@ -45,6 +45,13 @@
             <param name="model">LoginUserViewModel</param>
             <returns>Token para acesso ao sistema</returns>
         </member>
+        <member name="M:Agripoint.API.Controllers.LoginController.Register(ViewModel.Login.RegisterUserViewModel)">
+            <summary>
+            Inserir o objeto na base de dados.
+            </summary>
+            <param name="model">Objeto para registro na base de dados</param>
+            <returns>Objeto contendo os dados recém adicionados.</returns>
+        </member>
         <member name="M:Agripoint.API.Controllers.OrdersController.GetCompanies">
             <summary>
             retorna todos os registros inseridos
@@ -65,19 +72,24 @@
             <param name="model">Objeto para inserção na base de dados</param>
             <returns>Objeto contendo os dados recém adicionados.</returns>
         </member>
-        <member name="M:Agripoint.API.Controllers.OrdersController.UpdateAsync(ViewModel.Order.OrderViewModel)">
-            <summary>
-            Atualiza o objeto na base de dados.
-            </summary>
-            <param name="model">Objeto para atualização na base de dados</param>
-            <returns>Objeto contendo os dados recém atualizados.</returns>
-        </member>
         <member name="M:Agripoint.API.Controllers.OrdersController.DeleteAsync(System.Int64)">
             <summary>
             Realiza o  delete na base de dados.
             </summary>
             <param name="id">Id do tipo long a ser realizado o  delete na base de dados</param>
             <returns>No Content</returns>
+        </member>
+        <member name="M:Agripoint.API.Controllers.ReportsController.ListOrdersReports">
+            <summary>
+            Relatorios
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Agripoint.API.Controllers.ReportsController.ListRenewalsReports">
+            <summary>
+            Relatorios
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Agripoint.API.Controllers.SubscriptionsPlansController.GetAsync(System.Int64)">
             <summary>
@@ -101,6 +113,40 @@
             <returns>Objeto contendo os dados recém atualizados.</returns>
         </member>
         <member name="M:Agripoint.API.Controllers.SubscriptionsPlansController.DeleteAsync(System.Int64)">
+            <summary>
+            Realiza o  delete na base de dados.
+            </summary>
+            <param name="id">Id do tipo long a ser realizado o  delete na base de dados</param>
+            <returns>No Content</returns>
+        </member>
+        <member name="M:Agripoint.API.Controllers.UsersController.ListUsers">
+            <summary>
+            retorna todos os usuarios inseridos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Agripoint.API.Controllers.UsersController.GetAsync(System.String)">
+            <summary>
+            Retorna um elemento específico.
+            </summary>
+            <param name="id">Id do tipo string a ser buscado na base de dados</param>
+            <returns>Objeto contendo o usuario buscado.</returns>
+        </member>
+        <member name="M:Agripoint.API.Controllers.UsersController.GetByEmailAsync(System.String)">
+            <summary>
+            Retorna um usuario específico.
+            </summary>
+            <param name="email">email a ser buscado na base de dados</param>
+            <returns>Objeto contendo o usuario buscado.</returns>
+        </member>
+        <member name="M:Agripoint.API.Controllers.UsersController.UpdateAsync(ViewModel.Login.RegisterUserViewModel)">
+            <summary>
+            Atualiza o objeto na base de dados.
+            </summary>
+            <param name="model">Objeto para atualização na base de dados</param>
+            <returns>Objeto contendo os dados recém atualizados.</returns>
+        </member>
+        <member name="M:Agripoint.API.Controllers.UsersController.DeleteAsync(System.String)">
             <summary>
             Realiza o  delete na base de dados.
             </summary>

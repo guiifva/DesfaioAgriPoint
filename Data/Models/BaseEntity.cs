@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Models
 {
-    public abstract class BaseEntity
+    public abstract class BaseEntity 
     {
         public long Id { get; set; }
     }

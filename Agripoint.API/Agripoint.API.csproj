@@ -6,15 +6,23 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Users\PECEGE\Desktop\ProjetoFinal\Agripoint.API\Agripoint.API.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.2\Agripoint.API.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netcoreapp2.2\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Users\PECEGE\Desktop\Agripoint\Agripoint.API\Agripoint.API.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="CryptoHelper" Version="3.0.2" />
+    <PackageReference Include="Google.Cloud.DevTools.Common" Version="1.0.0" />
     <PackageReference Include="Hangfire" Version="1.7.7" />
     <PackageReference Include="Hangfire.Core" Version="1.7.7" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />

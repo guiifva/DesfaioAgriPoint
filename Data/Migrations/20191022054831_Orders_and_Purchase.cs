@@ -74,7 +74,7 @@ namespace Data.Migrations
                 column: "CreditCardId",
                 principalTable: "CreditCards",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Orders_SubscriptionsPlans_SubscriptionPlanId",
@@ -82,7 +82,7 @@ namespace Data.Migrations
                 column: "SubscriptionPlanId",
                 principalTable: "SubscriptionsPlans",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

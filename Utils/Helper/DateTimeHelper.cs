@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Utils.Helper
 {
@@ -20,10 +18,34 @@ namespace Utils.Helper
         {
             var validTimeZone = TimeZoneInfo.GetSystemTimeZones().Any(x => x.Id == timeZoneId);
 
-            if (!validTimeZone) throw new InvalidTimeZoneException();
+            if (!validTimeZone)
+            {
+                throw new InvalidTimeZoneException();
+            }
 
             var brazilTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
             return TimeZoneInfo.ConvertTime(date, TimeZoneInfo.Local, brazilTimeZoneInfo);
+        }
+
+        public static DateTime diaUtil(DateTime dt)
+        {
+            while (true)
+            {
+                if (dt.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    dt = dt.AddDays(2);
+                    return diaUtil(dt);
+                }
+                else if (dt.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    dt = dt.AddDays(1);
+                    return diaUtil(dt);
+                }
+                else
+                {
+                    return dt;
+                }
+            }
         }
     }
 }

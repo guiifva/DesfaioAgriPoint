@@ -106,32 +106,32 @@ namespace Agripoint.API.Controllers
 
         }
 
-        /// <summary>
-        /// Atualiza o objeto na base de dados.
-        /// </summary>
-        /// <param name="model">Objeto para atualização na base de dados</param>
-        /// <returns>Objeto contendo os dados recém atualizados.</returns>
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public virtual async Task<IActionResult> UpdateAsync([FromBody] OrderViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return StatusCode(StatusCodes.Status400BadRequest);
+        ///// <summary>
+        ///// Atualiza o objeto na base de dados.
+        ///// </summary>
+        ///// <param name="model">Objeto para atualização na base de dados</param>
+        ///// <returns>Objeto contendo os dados recém atualizados.</returns>
+        //[HttpPut]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public virtual async Task<IActionResult> UpdateAsync([FromBody] OrderViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return StatusCode(StatusCodes.Status400BadRequest);
 
-            try
-            {
-                var newModel = await _orderService.UpdateAsync(model);
-                return Ok(newModel);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+        //    try
+        //    {
+        //        var newModel = await _orderService.UpdateAsync(model);
+        //        return Ok(newModel);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError);
+        //    }
 
-        }
+        //}
 
         /// <summary>
         /// Realiza o  delete na base de dados.
