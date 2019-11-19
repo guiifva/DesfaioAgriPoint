@@ -42,7 +42,8 @@ namespace Business.Implementations
 
                     Subject = new ClaimsIdentity(new[]
                     {
-                        new Claim(ClaimTypes.Name, user.Id)
+                        new Claim("Email", user.Email),
+                        new Claim("Id", user.Id)
                     }),
                     Issuer = _appSettings.Issuer,
                     Audience = _appSettings.Audience,

@@ -12,6 +12,7 @@ namespace Data.Models
 
         public long? CompanyId { get; set; }
         public long? AddressId { get; set; }
+        public string Cpf { get; set; }
 
         [JsonIgnore]
         public virtual Company Company { get; set; }

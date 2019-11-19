@@ -82,7 +82,7 @@ namespace Agripoint.API.Controllers
         /// </summary>
         /// <param name="email">email a ser buscado na base de dados</param>
         /// <returns>Objeto contendo o usuario buscado.</returns>
-        [HttpGet("/email/{email}")]
+        [HttpGet("email/{email}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -82,7 +82,7 @@ namespace Agripoint.API.Controllers
             }
             catch(Exception e)
             {
-                return BadRequest(e);
+                return BadRequest("Errors:" + e.Message);
             }
         }
     }

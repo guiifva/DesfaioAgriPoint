@@ -174,7 +174,11 @@ namespace Agripoint.API
 
             app.UseAuthentication();
 
-            app.UseCors(option => option.AllowAnyOrigin()); ;
+            app.UseCors(option => {
+                option.AllowAnyOrigin();
+                option.AllowAnyMethod();
+                option.AllowAnyHeader();
+            }); ;
 
             app.UseMvc();
 

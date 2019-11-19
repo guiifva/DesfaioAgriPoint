@@ -12,6 +12,10 @@ namespace Data.Configuration
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users");
+
+            builder.Property(x => x.Cpf)
+                .HasMaxLength(11)
+                .IsRequired();
             
             //Relations
             builder.HasOne(x => x.Company)
