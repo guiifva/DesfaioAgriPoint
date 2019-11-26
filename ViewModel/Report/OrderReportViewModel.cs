@@ -11,6 +11,6 @@ namespace ViewModel.Report
         public string Email { get; set; }
         public string Plan { get; set; }
         public double PlanValue { get; set; }
-        public DateTime PurchaseDay { get; set; }
+        public string PurchaseDay { get; set; }
     }
 }

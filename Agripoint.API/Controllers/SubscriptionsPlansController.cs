@@ -18,23 +18,23 @@ namespace Agripoint.API.Controllers
     public class SubscriptionsPlansController : ControllerBase
     {
 
-        private readonly ISubscriptionPlansService _companyService;
+        private readonly ISubscriptionPlansService _subscriptionPlanService;
 
-        public SubscriptionsPlansController(ISubscriptionPlansService companyService)
+        public SubscriptionsPlansController(ISubscriptionPlansService subscriptionPlanService)
         {
-            _companyService = companyService;
+            _subscriptionPlanService = subscriptionPlanService;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetCompanies()
+        public async Task<IActionResult> GetPlans()
         {
             try
             {
-                var companies = await _companyService.AllAsync();
+                var companies = await _subscriptionPlanService.AllAsync();
                 return Ok(companies);
             }
             catch (Exception e)
@@ -57,7 +57,7 @@ namespace Agripoint.API.Controllers
         {
             try
             {
-                var model = await _companyService.GetAsync(id);
+                var model = await _subscriptionPlanService.GetAsync(id);
                 if (model == null)
                 {
                     return NotFound();
@@ -87,7 +87,7 @@ namespace Agripoint.API.Controllers
 
             try
             {
-                var newModel = await _companyService.InsertAsync(model);
+                var newModel = await _subscriptionPlanService.InsertAsync(model);
                 return Ok(newModel);
             }
             catch (Exception e)
@@ -114,7 +114,7 @@ namespace Agripoint.API.Controllers
 
             try
             {
-                var newModel = await _companyService.UpdateAsync(model);
+                var newModel = await _subscriptionPlanService.UpdateAsync(model);
                 return Ok(newModel);
             }
             catch (Exception e)
@@ -138,7 +138,7 @@ namespace Agripoint.API.Controllers
         {
             try
             {
-                await _companyService.DeleteAsync(id);
+                await _subscriptionPlanService.DeleteAsync(id);
                 return NoContent();
             }
             catch (Exception e)

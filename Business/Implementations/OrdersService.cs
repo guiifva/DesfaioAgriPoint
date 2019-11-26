@@ -70,11 +70,12 @@ namespace Business.Implementations
                             .Include(x => x.SubscriptionPlan)
                             .Select(x => new RenewalReportViewModel()
                             {
+                                OrderId = x.Id,
                                 UserName = x.User.UserName,
                                 Email = x.User.Email,
                                 Plan = x.SubscriptionPlan.PlanName,
                                 PlanValue = x.SubscriptionPlan.Value,
-                                PlanRenewalDate = x.PlanRenewalDate
+                                PlanRenewalDate = x.PlanRenewalDate.ToString("dd-MM-yyyy")
                             });
 
             return await list.ToListAsync();
@@ -92,7 +93,7 @@ namespace Business.Implementations
                     Email = x.User.Email,
                     Plan = x.SubscriptionPlan.PlanName,
                     PlanValue = x.SubscriptionPlan.Value,
-                    PurchaseDay = x.PurchaseDay
+                    PurchaseDay = x.PurchaseDay.ToString("dd-MM-yyyy")
                 });
 
             return await list.ToListAsync();
