@@ -6,6 +6,7 @@ using Data.Configuration;
 using Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Data
 {
@@ -17,7 +18,6 @@ namespace Data
         public DbSet<SubscriptionPlans> SubscriptionPlans { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
-
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

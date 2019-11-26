@@ -15,5 +15,6 @@ namespace Business.Interfaces
         Task<OrderViewModel> InsertModelAsync(Order model);
         Task<IList<RenewalReportViewModel>> ListRenewalReport();
         Task<IList<OrderReportViewModel>> ListOrdersReport();
+        bool ClientHasMoreThanOneOrder(string userId);
     }
 }

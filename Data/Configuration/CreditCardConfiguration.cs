@@ -20,15 +20,15 @@ namespace Data.Configuration
                 .IsRequired();
 
             builder.Property(x => x.CreditCardNumber)
-                .HasMaxLength(16)
+                .HasMaxLength(30)
                 .IsRequired();
                 
             builder.Property(x => x.Valid)
-                .HasMaxLength(5)
+                .HasMaxLength(16)
                 .IsRequired();
 
             builder.Property(x => x.CVV)
-                .HasMaxLength(3)
+                .HasMaxLength(4)
                 .IsRequired();
 
 

@@ -6,6 +6,7 @@ using Business.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ViewModel.Order;
 
 namespace Agripoint.API.Controllers
@@ -19,11 +20,14 @@ namespace Agripoint.API.Controllers
     {
         private readonly IOrdersService _orderService;
         private readonly ISubscriptionPlansService _subscriptionPlansService;
+        private readonly ILogger _logger;
 
         public OrdersController(IOrdersService orderService,
-                                ISubscriptionPlansService subscriptionPlansService)
+                                ISubscriptionPlansService subscriptionPlansService,
+                                ILogger<OrdersController> logger)
         {
             _orderService = orderService;
+            _logger = logger;
             _subscriptionPlansService = subscriptionPlansService;
         }
 
@@ -35,12 +39,34 @@ namespace Agripoint.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetCompanies()
+        public async Task<IActionResult> GetOrders()
         {
             try
             {
                 var companies = await _orderService.AllAsync();
                 return Ok(companies);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// retorna se o usuario possui mais de uma assinatura
+        /// <param name="userId">id do usuario</param>
+        /// </summary>
+        /// <returns> true or false</returns>
+        [HttpGet("HasSubscribe/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> ClientHasMoreThanOneSubscribe(Guid userId)
+        {
+            try
+            {
+                var userHasSubscribe = _orderService.ClientHasMoreThanOneOrder(userId.ToString());
+                return Ok(userHasSubscribe);
             }
             catch (Exception e)
             {
@@ -91,16 +117,32 @@ namespace Agripoint.API.Controllers
 
             try
             {
+                if (_orderService.ClientHasMoreThanOneOrder(model.UserId))
+                {
+                    _logger.LogWarning($"Usuario {model.UserId}, ja possui um plano e tentou assinar novamente outro plano");
+                    return BadRequest("Cliente já possui uma assinatura!");
+                }
+                    
+
                 var plan = await _subscriptionPlansService.GetAsync(model.SubscriptionPlanId);
 
                 if (plan == null)
-                    return BadRequest();
+                {
+                    _logger.LogWarning($"Usuario {model.UserId}, tentou fazer o pedido de um plano inexistente");
+                    return BadRequest("Plano inexistente!");
+
+                }
+                _logger.LogWarning($"Usuario {model.UserId}, está fazendo o pedido do plano {model.SubscriptionPlanId}");
 
                 var newModel = await _orderService.InsertWithPlanAsync(model, plan);
+                _logger.LogWarning($"Usuario {model.UserId}, concluiu o pedido, pedido: {newModel.Id}, plano assinado: {newModel.SubscriptionPlanId}");
+
                 return Ok(newModel);
             }
             catch (Exception e)
             {
+                _logger.LogWarning($"Usuario {model.UserId}, teve um erro ao finalizar o pedido, erro: ${e.Message}");
+
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 

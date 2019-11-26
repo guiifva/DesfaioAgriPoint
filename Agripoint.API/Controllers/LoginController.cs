@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ViewModel.Login;
 
 namespace Agripoint.API.Controllers
@@ -20,15 +21,18 @@ namespace Agripoint.API.Controllers
     {
         private readonly IJwtService _jwtService;
         private readonly IUserService _userService;
+        private readonly ILogger _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
 
         public LoginController(IJwtService jwtService,
                                 SignInManager<IdentityUser> signInManager,
-                                IUserService userService)
+                                IUserService userService,
+                                ILogger<LoginController> logger)
         {
             _signInManager = signInManager;
             _jwtService = jwtService;
             _userService = userService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -41,7 +45,12 @@ namespace Agripoint.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login(LoginUserViewModel model)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning($"Usuario {model.Email} não logado, erros: {ModelState.Values.SelectMany(e => e.Errors)}");
+
+                return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
+            }
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, true);
 
@@ -49,10 +58,13 @@ namespace Agripoint.API.Controllers
             {
                 try
                 {
+                    _logger.LogWarning($"Usuario {model.Email} logado com sucesso");
                     return Ok(await _jwtService.JWTGenerator(model.Email));
                 }
                 catch (Exception e)
                 {
+                    _logger.LogWarning($"Usuario {model.Email} não logado, erros: {e.Message}");
+
                     return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
                 }
             }
@@ -77,11 +89,12 @@ namespace Agripoint.API.Controllers
             try
             {
                 var result = await _userService.InsertUserAsync(model);
-
+                _logger.LogWarning($"Usuario cadastradato com sucesso: {result}");
                 return Ok(result);
             }
             catch(Exception e)
             {
+                _logger.LogWarning($"Nao foi possivel registrar os usuarios, erros: {e.Message}");
                 return BadRequest("Errors:" + e.Message);
             }
         }

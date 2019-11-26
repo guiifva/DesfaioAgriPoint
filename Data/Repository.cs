@@ -28,6 +28,9 @@ namespace Data
 
         public virtual IQueryable<TEntity> All() => _context.Set<TEntity>().AsNoTracking();
 
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filters) =>
+            await _context.Set<TEntity>().AnyAsync(filters);
+
         public void Update(params TEntity[] obj)
         {
             _context.Set<TEntity>().UpdateRange(obj);
@@ -121,9 +124,6 @@ namespace Data
         {
             return await _context.Set<TEntity>().LongCountAsync();
         }
-
-        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filters) =>
-            await _context.Set<TEntity>().AnyAsync(filters);
 
     }
 }

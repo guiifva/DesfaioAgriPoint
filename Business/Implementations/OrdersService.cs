@@ -63,6 +63,11 @@ namespace Business.Implementations
             return _mapper.Map<OrderViewModel>(model);
         }
 
+        public bool ClientHasMoreThanOneOrder(string userId)
+        {
+            return _repository.Any(x => x.UserId == userId);
+        }
+
         public async Task<IList<RenewalReportViewModel>> ListRenewalReport()
         {
             var list = _repository.All()

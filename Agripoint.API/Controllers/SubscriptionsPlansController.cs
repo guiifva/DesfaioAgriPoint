@@ -35,7 +35,7 @@ namespace Agripoint.API.Controllers
             try
             {
                 var companies = await _subscriptionPlanService.AllAsync();
-                return Ok(companies);
+                return Ok(companies.OrderBy(x => x.Value));
             }
             catch (Exception e)
             {
